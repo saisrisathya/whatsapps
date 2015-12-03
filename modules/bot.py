@@ -19,7 +19,8 @@ class Bot():
       if len(parts[0]) > 0:
         support_type = parts[0][1:]
       else:
-        return 'ERROR'
+        helpBot = HelpBot()
+        return helpBot.execute()
 
       if support_type == 'help':
         helpBot = HelpBot()
@@ -74,9 +75,9 @@ class Bot():
           self.db.add_money_available(phone, location)
           return thank_you_response
 
-      return ""
+      return ''
     except:
-      return ""
+      return
 
   def get_resources(self, support_type, location):
     jsonObject = json.loads(urllib2.urlopen('http://178.62.32.86:1337/data/' + support_type + '/').read())
