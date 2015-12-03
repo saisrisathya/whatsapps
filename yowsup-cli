@@ -215,9 +215,9 @@ class AppsArgParser(YowArgParser):
     def process(self):
         super(AppsArgParser, self).process()
 
-        if self.args["yowsup"]:
-            self.startCmdline()
-        elif self.args["chennai"]:
+        # if self.args["yowsup"]:
+        #     self.startCmdline()
+        if self.args["chennai"]:
             self.startChennai()
         else:
             return False
