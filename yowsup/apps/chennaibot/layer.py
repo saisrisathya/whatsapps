@@ -15,7 +15,7 @@ class EchoLayer(YowInterfaceLayer):
         elif messageProtocolEntity.getType() == 'media':
             if messageProtocolEntity.getMediaType() == "location":
                 req = "#location " + str(messageProtocolEntity.getLatitude()) +","+ str(messageProtocolEntity.getLongitude()) + " " + str(messageProtocolEntity.getFrom(False))
-                messageEntity = TextMessageProtocolEntity(chennaiBot.message(req), to = messageProtocolEntity.getFrom())
+                messageEntity = TextMessageProtocolEntity(chennaiBot.message(req, str(messageProtocolEntity.getFrom(False))), to = messageProtocolEntity.getFrom())
                 self.toLower(messageEntity)
 
 

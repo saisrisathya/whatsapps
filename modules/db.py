@@ -34,6 +34,18 @@ class DB(object):
     		return True
     	return False
 
+    def add_feedback(self, phone, message):
+    	DB.cursor.execute('INSERT INTO feedback VALUES (\"'+phone+'\", \"'+message+'\", '+str(int(time.time()))+')')
+    	DB.db.commit()
+
+    def add_like(self, phone):
+    	DB.cursor.execute('INSERT INTO likes VALUES (\"'+phone+'\", '+str(int(time.time()))+')')
+    	DB.db.commit()
+
+    def add_sos(self, phone, location):
+    	DB.cursor.execute('INSERT INTO sos VALUES (\"'+phone+'\", \"'+location+'\", '+str(int(time.time()))+')')
+    	DB.db.commit()
+
     def add_food_needed(self, phone, location):
     	return self.stuff_needed('food_needed', phone, location)
 
