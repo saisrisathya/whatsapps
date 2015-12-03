@@ -7,7 +7,7 @@ class EchoLayer(YowInterfaceLayer):
     def onMessage(self, messageProtocolEntity):
 
         if messageProtocolEntity.getType() == 'text':
-            botResponse = chennaiBot.message(messageProtocolEntity.getBody())
+            botResponse = chennaiBot.message(messageProtocolEntity.getBody(), str(messageProtocolEntity.getFrom(False)))
             if botResponse != "#":
                 messageEntity = TextMessageProtocolEntity(botResponse, to = messageProtocolEntity.getFrom())
                 self.toLower(messageEntity)
@@ -50,4 +50,4 @@ class EchoLayer(YowInterfaceLayer):
             print("Echoing vcard (%s, %s) to %s" % (messageProtocolEntity.getName(), messageProtocolEntity.getCardData(), messageProtocolEntity.getFrom(False)))
 
 
-chennaiBot  =Bot()
+chennaiBot = Bot()

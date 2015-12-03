@@ -1,10 +1,6 @@
 import json
 import requests
 
-
-
-
-
 class RescueBot():
   def __init__(self):
     pass
