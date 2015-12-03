@@ -11,7 +11,7 @@ class Bot():
   def __init__(self):
     self.name = None
   def message(self, content):
-    msg = "Help is coming"
+    msg = "#"
     if content[0] == START_DELIMITER_SYMBOL:
       parts = content[1:].split()
       parts = [ part.lower() for part in parts]
@@ -33,7 +33,9 @@ class Bot():
       elif keyword == 'location':
         rescuebot = RescueBot()
         result = rescuebot.myLocation(command, params)
-
+      elif keyword == 'food':
+        rescuebot = RescueBot()
+        result = rescuebot.food(command)
       for r in result:
         if r=='text':
           msg = str(result[r])

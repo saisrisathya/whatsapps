@@ -7,8 +7,10 @@ class EchoLayer(YowInterfaceLayer):
     def onMessage(self, messageProtocolEntity):
 
         if messageProtocolEntity.getType() == 'text':
-            messageEntity = TextMessageProtocolEntity(chennaiBot.message(messageProtocolEntity.getBody()), to = messageProtocolEntity.getFrom())
-            self.toLower(messageEntity)
+            botResponse = chennaiBot.message(messageProtocolEntity.getBody())
+            if botResponse != "#":
+                messageEntity = TextMessageProtocolEntity(botResponse, to = messageProtocolEntity.getFrom())
+                self.toLower(messageEntity)
             self.onTextMessage(messageProtocolEntity)
         elif messageProtocolEntity.getType() == 'media':
             if messageProtocolEntity.getMediaType() == "location":
