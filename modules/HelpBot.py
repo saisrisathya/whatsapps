@@ -3,10 +3,14 @@ HELP_MESSAGE = "\n\
 \n\
 In order to receive support, kindly send\n\
 \n\
-#food <location>\n\
-#water <location>\n\
-#money <location>\n\
-#transport <location>\n\
+#food\n\
+#food <location> eg. #food adayar\n\
+#water\n\
+#water <location> eg. #water adayar\n\
+#transport\n\
+#transport <location> eg. #transport adayar\n\
+#money\n\
+#money <location> eg. #money adayar\n\
 \n\
 In order to provide support, kindly send\n\
 \n\
