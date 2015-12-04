@@ -1,8 +1,37 @@
-from HelpBot import HelpBot
 from RescueBot import RescueBot
 from db import DB
 import urllib2
 import json
+
+HELP_MESSAGE = "\n\
+## WhatsApp Help for Chennai Relief ##\n\
+\n\
+In order to receive support, kindly send\n\
+\n\
+#food\n\
+#food <location> eg. #food adayar\n\
+#water\n\
+#water <location> eg. #water adayar\n\
+#transport\n\
+#transport <location> eg. #transport adayar\n\
+#money\n\
+#money <location> eg. #money adayar\n\
+\n\
+In order to provide support, kindly send\n\
+\n\
+#support food <location>\n\
+#support water <location>\n\
+#support money <location>\n\
+#support transport <location>\n\
+\n\
+Send your Location to get instant help from someone near you. We will try to connect that person to you.\n\
+\n\
+You can tell us how to improve by sending feedback and if you like the service\n\
+#feedback <message>\n\
+#like\n\
+\n\n\
+PS: Location is optional\n\
+PPS: This number can be reached only via WhatsApp."
 
 class Bot():
 
@@ -17,16 +46,17 @@ class Bot():
       if content[0] != '#':
           return ''
 
+      content = content[1:]
       parts = content.lower().strip().split(' ')
+      parts = [part.strip() for part in parts]
+      
       if len(parts[0]) > 0:
-        support_type = parts[0][1:]
+        support_type = parts[0]
       else:
-        helpBot = HelpBot()
-        return helpBot.execute()
+        return HELP_MESSAGE
 
       if support_type == 'help':
-        helpBot = HelpBot()
-        return helpBot.execute()
+        return HELP_MESSAGE
 
       parts = parts[1:]
       location = ' '.join(parts) if len(parts) > 0 else ''
@@ -42,6 +72,7 @@ class Bot():
         return 'Noted your location. We\'ll notify someone in your location who can help'
       if support_type == 'food':
         self.db.add_food_needed(phone, location)
+        print 'FOOD', location
         return self.get_resources('food', location)
       elif support_type == 'water':
         self.db.add_water_needed(phone, location)
