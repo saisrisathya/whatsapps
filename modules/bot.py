@@ -27,7 +27,7 @@ class Bot():
         return helpBot.execute()
 
       parts = parts[1:]
-      location = ''
+      location = ' '.join(parts) if len(parts) > 0 else ''
 
       self.db.add_chat(phone, content)
 
