@@ -12,6 +12,8 @@ class Bot():
 
   def message(self, content, phone):
     try:
+      self.db.add_chat(phone, content)
+
       if content[0] != '#':
           return ''
 
@@ -28,8 +30,6 @@ class Bot():
 
       parts = parts[1:]
       location = ' '.join(parts) if len(parts) > 0 else ''
-
-      self.db.add_chat(phone, content)
 
       if support_type == 'feedback':
         self.db.add_feedback(phone, content)
