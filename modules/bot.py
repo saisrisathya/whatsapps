@@ -30,8 +30,10 @@ You can tell us how to improve by sending feedback and if you like the service\n
 #feedback <message>\n\
 #like\n\
 \n\n\
+To retrive this help message, WhatsApp #help to +91-7200-845998\n\
+\n\
 PS: Location is optional\n\
-PPS: This number can be reached only via WhatsApp."
+PPS: This number (+91-7200-845998) can be reached only via WhatsApp."
 
 class Bot():
 
@@ -49,7 +51,7 @@ class Bot():
       content = content[1:]
       parts = content.lower().strip().split(' ')
       parts = [part.strip() for part in parts]
-      
+
       if len(parts[0]) > 0:
         support_type = parts[0]
       else:
