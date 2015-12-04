@@ -211,7 +211,10 @@ class AppsArgParser(YowArgParser):
         echoOpts = self.add_argument_group("Chennai Rescue Bot")
         echoOpts.add_argument('-e', '--chennai', action = "store_true", help = "Start the Chennai Rescue Bot")
 
-
+        sendOpts = self.add_argument_group("Send client demo")
+        sendOpts.add_argument('-s', '--send', action="store", help = "Send a message to specified phone number, "
+                                                                     "wait for server receipt and exit",
+                              metavar=("phone", "message"), nargs = 2)
     def process(self):
         super(AppsArgParser, self).process()
 
@@ -219,6 +222,8 @@ class AppsArgParser(YowArgParser):
         #     self.startCmdline()
         if self.args["chennai"]:
             self.startChennai()
+        elif self.args["send"]:
+            self.startSendClient()
         else:
             return False
         return True
@@ -255,6 +260,20 @@ class AppsArgParser(YowArgParser):
             print("\nYowsdown")
             sys.exit(0)
 
+    def startSendClient(self):
+        from yowsup.apps import sendclient
+        credentials = self._getCredentials()
+        if not credentials:
+            print("Error: You must specify a configuration method")
+            sys.exit(1)
+
+        try:
+            stack = sendclient.YowsupSendStack(credentials, [([self.args["send"][0], self.args["send"][1]])],
+                                               not self.args["unmoxie"])
+            stack.start()
+        except KeyboardInterrupt:
+            print("\nYowsdown")
+            sys.exit(0)
 
 
 if __name__ == "__main__":
