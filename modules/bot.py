@@ -46,7 +46,7 @@ class Bot():
       self.db.add_chat(phone, content)
 
       if content[0] != '#':
-          return ''
+          return '#'
 
       content = content[1:]
       parts = content.lower().strip().split(' ')
@@ -113,10 +113,12 @@ class Bot():
       return ''
 
   def get_resources(self, support_type, location):
-    jsonObject = json.loads(urllib2.urlopen('http://178.62.32.86:1337/data/' + support_type + '/').read())
+    jsonObject = json.loads(urllib2.urlopen('http://chennairains.org/api/contacts.json').read())
+    objRows = [item for item in jsonObject['rows'] if location in item[1]]
+
     returnString = 'You can contact the following people for help \n\n'
-    for obj in jsonObject:
-      returnString += obj['name'] + '\n'
-      returnString += obj['phone'] + '\n'
-      returnString += obj['location'] + '\n\n'
+    for obj in objRows:
+      returnString += obj[0] + '\n'
+      returnString += obj[2] + '\n'
+      returnString += obj[3] + '\n\n'
     return returnString
