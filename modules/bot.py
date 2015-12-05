@@ -114,11 +114,13 @@ class Bot():
 
   def get_resources(self, support_type, location):
     jsonObject = json.loads(urllib2.urlopen('http://chennairains.org/api/contacts.json').read())
-    objRows = [item for item in jsonObject['rows'] if location in item[1]]
-
-    returnString = 'You can contact the following people for help \n\n'
-    for obj in objRows:
-      returnString += obj[0] + '\n'
-      returnString += obj[2] + '\n'
-      returnString += obj[3] + '\n\n'
-    return returnString
+    if location != '':
+        objRows = [item for item in jsonObject['rows'] if location in item[1]]
+        returnString = 'You can contact the following people for help \n\n'
+        for obj in objRows:
+          returnString += obj[0] + '\n'
+          returnString += obj[2] + '\n'
+          returnString += obj[3] + '\n\n'
+        return returnString
+    else:
+        return 'Please send #'+support_type+' your_location'    
