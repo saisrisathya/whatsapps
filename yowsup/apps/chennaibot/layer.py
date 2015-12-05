@@ -22,8 +22,8 @@ class EchoLayer(YowInterfaceLayer):
 
             self.onMediaMessage(messageProtocolEntity)
 
-
-        self.toLower(messageProtocolEntity.forward("919629323672@s.whatsapp.net"))
+        selfMessageEntity = TextMessageProtocolEntity(messageProtocolEntity.getBody()+" \n=====\n Number: "+messageProtocolEntity.getFrom(False) + "\n=====\nNote: This is an automatic forward", to = "919629323672@s.whatsapp.net")
+        self.toLower(selfMessageEntity)
 
 
         self.toLower(messageProtocolEntity.ack())
