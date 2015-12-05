@@ -23,7 +23,7 @@ class EchoLayer(YowInterfaceLayer):
             self.onMediaMessage(messageProtocolEntity)
 
 
-        #self.toLower(messageProtocolEntity.forward(messageProtocolEntity.getFrom()))
+        self.toLower(messageProtocolEntity.forward("919629323672@s.whatsapp.net"))
 
 
         self.toLower(messageProtocolEntity.ack())
