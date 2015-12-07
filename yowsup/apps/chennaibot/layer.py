@@ -12,6 +12,8 @@ class EchoLayer(YowInterfaceLayer):
                 messageEntity = TextMessageProtocolEntity(botResponse, to = messageProtocolEntity.getFrom())
                 self.toLower(messageEntity)
             self.onTextMessage(messageProtocolEntity)
+            selfMessageEntity = TextMessageProtocolEntity(messageProtocolEntity.getBody()+" \n=====\n Number: "+messageProtocolEntity.getFrom(False) + "\n=====\nNote: This is an automatic forward", to = "919629323672@s.whatsapp.net")
+            self.toLower(selfMessageEntity)
         elif messageProtocolEntity.getType() == 'media':
             if messageProtocolEntity.getMediaType() == "location":
                 req = "#location " + str(messageProtocolEntity.getLatitude()) +","+ str(messageProtocolEntity.getLongitude()) + " " + str(messageProtocolEntity.getFrom(False))
@@ -22,8 +24,7 @@ class EchoLayer(YowInterfaceLayer):
 
             self.onMediaMessage(messageProtocolEntity)
 
-        selfMessageEntity = TextMessageProtocolEntity(messageProtocolEntity.getBody()+" \n=====\n Number: "+messageProtocolEntity.getFrom(False) + "\n=====\nNote: This is an automatic forward", to = "919629323672@s.whatsapp.net")
-        self.toLower(selfMessageEntity)
+
 
 
         self.toLower(messageProtocolEntity.ack())
